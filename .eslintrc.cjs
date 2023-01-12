@@ -20,5 +20,6 @@ module.exports = {
                 js: "always",
             },
         ],
+        "default-param-last": ["off"],
     },
 };

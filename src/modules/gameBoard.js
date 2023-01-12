@@ -1,4 +1,4 @@
-export default class GameBoard {
+export class GameBoard {
     constructor() {
         this.board = new Array(10).fill(
             new Array(10).fill({

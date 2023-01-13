@@ -1,11 +1,5 @@
 export class GameBoard {
     constructor() {
-        // this.board = new Array(10).fill(
-        //     new Array(10).fill({
-        //         attacked: false,
-        //         isShip: false,
-        //     })
-        // );
         this.board = new Array(10)
             .fill()
             .map(() =>
@@ -42,4 +36,6 @@ export class GameBoard {
             )
         );
     }
+
+    
 }

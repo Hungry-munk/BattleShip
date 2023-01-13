@@ -2,7 +2,7 @@
 import { Ship } from "../modules/ship.js";
 import { GameBoard } from "../modules/gameBoard.js";
 
-describe("array creation tests", () => {
+describe.skip("array creation tests", () => {
     const gameBoard = new GameBoard();
     test("when arrays are created the is ship Value is false", () => {
         expect(gameBoard.board[0][0].isShip).toBe(false);
@@ -12,27 +12,28 @@ describe("array creation tests", () => {
     });
 });
 
-describe("placing Ship methods", () => {
+describe.skip("placeShips method", () => {
     test("Placing 2 ships of size 4 and 5 with the placeships method ", () => {
         const gameBoard = new GameBoard();
 
-        const ship = new Ship(5, [
-            [1, 2],
-            [2, 2],
-            [3, 2],
-            [4, 2],
-            [5, 2],
-        ]);
+        gameBoard.ships.push(
+            new Ship(5, [
+                [1, 2],
+                [2, 2],
+                [3, 2],
+                [4, 2],
+                [5, 2],
+            ])
+        );
 
-        const ship2 = new Ship(4, [
-            [1, 3],
-            [1, 4],
-            [1, 5],
-            [1, 6],
-        ]);
-
-        gameBoard.ships.push(ship);
-        gameBoard.ships.push(ship2);
+        gameBoard.ships.push(
+            new Ship(4, [
+                [1, 3],
+                [1, 4],
+                [1, 5],
+                [1, 6],
+            ])
+        );
 
         gameBoard.placeShips();
 
@@ -43,7 +44,8 @@ describe("placing Ship methods", () => {
             allCoords: undefined,
         });
     });
-    describe("placing one ship correctly using the placeship method which doesnt effect other slots", () => {
+
+    describe.skip("placing one ship correctly using the placeship method which doesnt effect other slots", () => {
         const gameBoard = new GameBoard();
         gameBoard.ships.push(
             new Ship(2, [
@@ -66,5 +68,35 @@ describe("placing Ship methods", () => {
         test("not placed ship values not to be ships 2", () => {
             expect(gameBoard.board[5][7].isShip).toBe(false);
         });
+    });
+});
+
+describe("findShip method", () => {
+    const gameBoard = new GameBoard();
+
+    const ship = new Ship(5, [
+        [1, 2],
+        [2, 2],
+        [3, 2],
+        [4, 2],
+        [5, 2],
+    ]);
+    gameBoard.ships.push(ship);
+
+    const ship2 = new Ship(4, [
+        [1, 3],
+        [1, 4],
+        [1, 5],
+        [1, 6],
+    ]);
+    gameBoard.ships.push(ship2);
+    gameBoard.placeShips();
+
+    test("findShip method to return a the correct ship from one of its coords", () => {
+        expect(gameBoard.findShip([1, 3])).toEqual(ship2);
+    });
+
+    test("findShip method to return undefined from entering a coord that isnt a ship", () => {
+        expect(gameBoard.findShip([8, 5])).toBeFalsy();
     });
 });

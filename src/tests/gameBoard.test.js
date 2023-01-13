@@ -71,7 +71,7 @@ describe.skip("placeShips method", () => {
     });
 });
 
-describe("findShip method", () => {
+describe("findShip and attacking methods", () => {
     const gameBoard = new GameBoard();
 
     const ship = new Ship(5, [
@@ -98,5 +98,17 @@ describe("findShip method", () => {
 
     test("findShip method to return undefined from entering a coord that isnt a ship", () => {
         expect(gameBoard.findShip([8, 5])).toBeFalsy();
+    });
+
+    // attacking method
+    gameBoard.receiveAttack([1, 3]);
+    test("attacking method increases the hitcount and changes that object n those coords to attacked:true ", () => {
+        expect(ship2.hitCount).toBe(1);
+        expect(gameBoard.board[1][3].attacked).toBe(true);
+    });
+
+    test("attacking method doestn attack other squares", () => {
+        expect(gameBoard.board[5][3].attacked).toBe(false);
+        expect(gameBoard.board[7][6].attacked).toBe(false);
     });
 });

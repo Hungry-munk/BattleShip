@@ -22,13 +22,6 @@ export class GameBoard {
         this.ships.forEach(ship => this.placeShip(ship.coords));
     }
 
-    receiveAttack(coords) {
-        if (this.baord[coords[0]][coords[1]].isShip) {
-            this.findShip().hit();
-        }
-        this.baord[coords[0]][coords[1]].attacked = true;
-    }
-
     findShip(coords) {
         return this.ships.find(ship =>
             ship.coords.find(
@@ -37,5 +30,10 @@ export class GameBoard {
         );
     }
 
-    
+    receiveAttack(coords) {
+        if (this.board[coords[0]][coords[1]].isShip) {
+            this.findShip(coords).hit();
+        }
+        this.board[coords[0]][coords[1]].attacked = true;
+    }
 }

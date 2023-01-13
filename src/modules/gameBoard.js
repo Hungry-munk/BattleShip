@@ -33,7 +33,8 @@ export class GameBoard {
 
     receiveAttack(coords) {
         if (this.board[coords[0]][coords[1]].isShip) {
-            this.findShip(coords).hit();
+            const ship = this.findShip(coords);
+            ship.hit();
         } else {
             this.missedShots.push(coords);
         }

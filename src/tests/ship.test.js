@@ -15,19 +15,19 @@ describe("hit method", () => {
     });
 });
 
-describe("isSunk method", () => {
+describe("sunk method", () => {
     test("a ship of length 2 to be sunked after hit twice", () => {
         const ship = new Ship(2);
         ship.hit();
         ship.hit();
-        expect(ship.isSunk).toBeTruthy();
+        expect(ship.sunk).toBeTruthy();
     });
 
     test(" a ship of length 3 to not be sunked after hit twice", () => {
         const ship = new Ship(3);
         ship.hit();
         ship.hit();
-        expect(ship.isSunk).toBeFalsy();
+        expect(ship.sunk).toBeFalsy();
     });
 });
 

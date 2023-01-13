@@ -112,3 +112,18 @@ describe("findShip and attacking methods", () => {
         expect(gameBoard.board[7][6].attacked).toBe(false);
     });
 });
+
+describe("testing shipsDown() get method ", () => {
+    const gameBoard = new GameBoard();
+    gameBoard.ships.push(new Ship(1, [[1, 5]]));
+    test("sitatuation where shipsDown should return true", () => {
+        gameBoard.placeShips();
+        gameBoard.receiveAttack([1, 5]);
+        expect(gameBoard.shipsDown).toBe(true);
+    });
+    test("sitatuation where shipsDown should return false", () => {
+        gameBoard.placeShips();
+        gameBoard.ships.push(new Ship(1, [[2, 4]]));
+        expect(gameBoard.shipsDown).toBe(false);
+    });
+});

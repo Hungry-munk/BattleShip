@@ -2,11 +2,10 @@ export class Ship {
     constructor(length = 1, coords) {
         this.length = length;
         this.hitCount = 0;
-        this.sunk = false;
         this.coords = coords;
     }
 
-    get isSunk() {
+    get sunk() {
         return this.hitCount === this.length;
     }
 

@@ -8,6 +8,7 @@ export class GameBoard {
                     .map(() => ({ attacked: false, isShip: false }))
             );
         this.ships = [];
+        this.missedShots = [];
     }
 
     placeShip(allCoords) {
@@ -33,7 +34,13 @@ export class GameBoard {
     receiveAttack(coords) {
         if (this.board[coords[0]][coords[1]].isShip) {
             this.findShip(coords).hit();
+        } else {
+            this.missedShots.push(coords);
         }
         this.board[coords[0]][coords[1]].attacked = true;
+    }
+
+    get shipsDown() {
+        return this.ships.every(ship => ship.sunk);
     }
 }

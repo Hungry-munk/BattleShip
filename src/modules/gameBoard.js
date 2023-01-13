@@ -1,10 +1,18 @@
 export class GameBoard {
     constructor() {
-        this.board = new Array(10).fill(
-            new Array(10).fill({
-                attacked: false,
-            })
-        );
+        // this.board = new Array(10).fill(
+        //     new Array(10).fill({
+        //         attacked: false,
+        //         isShip: false,
+        //     })
+        // );
+        this.board = new Array(10)
+            .fill()
+            .map(() =>
+                new Array(10)
+                    .fill()
+                    .map(() => ({ attacked: false, isShip: false }))
+            );
         this.ships = [];
     }
 
@@ -14,6 +22,10 @@ export class GameBoard {
             this.board[coords[0]][coords[1]].coords = coords;
             this.board[coords[0]][coords[1]].allCoords = allCoords;
         });
+    }
+
+    placeShips() {
+        this.ships.forEach(ship => this.placeShip(ship.coords));
     }
 
     receiveAttack(coords) {

@@ -7,11 +7,7 @@ export class Ship {
     }
 
     get isSunk() {
-        if (this.hitCount === this.length) {
-            this.sunk = true;
-            return true;
-        }
-        return false;
+        return this.hitCount === this.length;
     }
 
     hit() {

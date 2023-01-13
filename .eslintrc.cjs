@@ -21,5 +21,6 @@ module.exports = {
             },
         ],
         "default-param-last": ["off"],
+        "no-debugger": "off",
     },
 };

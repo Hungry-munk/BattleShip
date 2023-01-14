@@ -68,9 +68,6 @@ export class GameBoard {
     }
 
     #generateRandomLocationPath(origin, direction, size) {
-        if (origin.includes(9) || origin.includes(8) || origin.includes(7)) {
-            debugger;
-        }
         if (this.checkCollision([origin])) return false;
         const nextShipCoords = [[...origin]];
         const previousShipCoords = [[...origin]];
@@ -83,7 +80,7 @@ export class GameBoard {
             const previousCoord = [...origin];
             // if out of bounds
             if (nextCoord[direction] + i > 9) nextOutOfBounds = true;
-            if (nextCoord[direction - i] < 0) previousOutOfBounds = true;
+            if (nextCoord[direction] - i < 0) previousOutOfBounds = true;
             previousCoord[direction] -= i;
             nextCoord[direction] += i;
             nextShipCoords.push(nextCoord);
@@ -91,7 +88,7 @@ export class GameBoard {
         }
         // checking its validitys
         if (this.checkCollision(nextShipCoords) || nextOutOfBounds) {
-            return this.checkCollision(previousOutOfBounds) ||
+            return this.checkCollision(previousShipCoords) ||
                 previousOutOfBounds
                 ? false
                 : previousShipCoords;
@@ -102,8 +99,13 @@ export class GameBoard {
     checkCollision(coords) {
         return !!this.ships.find(ship => {
             if (ship.coords) {
-                return !!this.ships.coords.find(
-                    coord => coord[0] === coords[0] && coord[1] === coords[1]
+                return !!ship.coords.find(
+                    shipCoord =>
+                        !!coords.find(
+                            coord =>
+                                shipCoord[0] === coord[0] &&
+                                shipCoord[1] === coord[1]
+                        )
                 );
             }
             return false;

@@ -128,18 +128,89 @@ describe.skip("testing shipsDown() get method ", () => {
     });
 });
 
-describe("everything to do with the generateRandomLocation method ", () => {
-    const gameBoard = new GameBoard(10);
-    test("can generate random location for one ship ", () => {
-        const ship = new Ship(3);
-        gameBoard.ships.push(ship);
+describe.skip("checkCollision method", () => {
+    test("checkCollisoin returns true from coppied coord values for one ship", () => {
+        const gameBoard = new GameBoard(10);
+        //  creating a ship
+        const ship1 = new Ship(5);
+        ship1.coords = gameBoard.generateRandomLocation(ship1);
+        gameBoard.ships.push(ship1);
+        gameBoard.placeShips();
+        // giving it the exact coords
+        expect(gameBoard.checkCollision(ship1.coords)).toBe(true);
+    });
+});
 
-        const randomLocal = gameBoard.generateRandomLocation(
-            // basically ship variable is being passed in
-            gameBoard.ships[0]
-        );
-        gameBoard.ships[0].coords = randomLocal;
-        expect(randomLocal).toEqual(expect.arrayContaining([]));
-        expect(randomLocal.length).toBe(ship.length);
+describe("everything to do with the generateRandomLocation method ", () => {
+    describe.skip("testing singular placements with th generateRandomLocation method", () => {
+        const gameBoard = new GameBoard(10);
+        test("can generate random location for one ship ", () => {
+            const ship = new Ship(5);
+            ship.coords = gameBoard.generateRandomLocation(ship);
+            gameBoard.ships.push(ship);
+            gameBoard.placeShips();
+            expect(ship.coords.length).toBe(ship.length);
+            // tseting multiple ships
+        });
+        test("can generate valid coords that dont colide with the other ship", () => {
+            const ship = new Ship(4);
+            ship.coords = gameBoard.generateRandomLocation(ship);
+            gameBoard.ships.push(ship);
+            gameBoard.placeShips();
+            expect(ship.coords.length).toBe(ship.length);
+        });
+    });
+
+    describe("testing placing multiple ships at once", () => {
+        test("can place 5 ships correctly", () => {
+            const gameBoard = new GameBoard(10);
+
+            const ship1 = new Ship(5);
+            const ship2 = new Ship(4);
+            const ship3 = new Ship(4);
+            const ship4 = new Ship(3);
+            const ship5 = new Ship(4);
+
+            ship1.coords = gameBoard.generateRandomLocation(ship1);
+            gameBoard.ships.push(ship1);
+            gameBoard.placeShips();
+
+            ship2.coords = gameBoard.generateRandomLocation(ship2);
+            gameBoard.ships.push(ship2);
+            gameBoard.placeShips();
+
+            ship3.coords = gameBoard.generateRandomLocation(ship3);
+            gameBoard.ships.push(ship3);
+            gameBoard.placeShips();
+
+            ship4.coords = gameBoard.generateRandomLocation(ship4);
+            gameBoard.ships.push(ship4);
+            gameBoard.placeShips();
+
+            ship5.coords = gameBoard.generateRandomLocation(ship5);
+            gameBoard.ships.push(ship5);
+            gameBoard.placeShips();
+
+            expect(
+                (() => {
+                    // an IIFE for checking if any ship values are the same
+                    const allValues = [];
+                    gameBoard.ships.forEach(ship =>
+                        allValues.push(...ship.coords)
+                    );
+                    for (let i = 0; i < allValues.length; i++) {
+                        for (let j = 0; j < allValues.length; j++) {
+                            if (
+                                allValues[i][0] === allValues[j][0] &&
+                                allValues[i][1] === allValues[j][1]
+                            ) {
+                                if (!(i === j)) return true;
+                            }
+                        }
+                    }
+                    return false;
+                })()
+            ).toBe(false);
+        });
     });
 });

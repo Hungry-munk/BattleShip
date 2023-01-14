@@ -5,7 +5,7 @@ export class AiPlayer extends Player {
         return this;
     }
 
-    getRandomNeartMove() {
+    getRandomNearMove() {
         return this;
     }
 }

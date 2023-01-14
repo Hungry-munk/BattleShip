@@ -1,9 +1,10 @@
 export class GameBoard {
-    constructor() {
-        this.board = new Array(10)
+    constructor(size) {
+        this.size = size;
+        this.board = new Array(size)
             .fill()
             .map(() =>
-                new Array(10)
+                new Array(size)
                     .fill()
                     .map(() => ({ attacked: false, isShip: false }))
             );
@@ -43,5 +44,69 @@ export class GameBoard {
 
     get shipsDown() {
         return this.ships.every(ship => ship.sunk);
+    }
+
+    // location stuff
+    generateRandomLocation(ship) {
+        // return
+        let shipCoords;
+        do {
+            shipCoords = this.#generateRandomLocationPath(
+                // get origin coords
+                [this.#randomCoord(), this.#randomCoord()],
+                // get direction where 1 is vertcal and 0 is horizontal
+                Math.floor(Math.random() * 2),
+                ship.length
+            );
+        } while (!shipCoords);
+
+        return shipCoords;
+    }
+
+    #randomCoord() {
+        return Math.floor(Math.random() * this.size);
+    }
+
+    #generateRandomLocationPath(origin, direction, size) {
+        if (origin.includes(9) || origin.includes(8) || origin.includes(7)) {
+            debugger;
+        }
+        if (this.checkCollision([origin])) return false;
+        const nextShipCoords = [[...origin]];
+        const previousShipCoords = [[...origin]];
+
+        let nextOutOfBounds = false;
+        let previousOutOfBounds = false;
+
+        for (let i = 1; i < size; i++) {
+            const nextCoord = [...origin];
+            const previousCoord = [...origin];
+            // if out of bounds
+            if (nextCoord[direction] + i > 9) nextOutOfBounds = true;
+            if (nextCoord[direction - i] < 0) previousOutOfBounds = true;
+            previousCoord[direction] -= i;
+            nextCoord[direction] += i;
+            nextShipCoords.push(nextCoord);
+            previousShipCoords.push(previousCoord);
+        }
+        // checking its validitys
+        if (this.checkCollision(nextShipCoords) || nextOutOfBounds) {
+            return this.checkCollision(previousOutOfBounds) ||
+                previousOutOfBounds
+                ? false
+                : previousShipCoords;
+        }
+        return nextShipCoords;
+    }
+
+    checkCollision(coords) {
+        return !!this.ships.find(ship => {
+            if (ship.coords) {
+                return !!this.ships.coords.find(
+                    coord => coord[0] === coords[0] && coord[1] === coords[1]
+                );
+            }
+            return false;
+        });
     }
 }

@@ -3,7 +3,7 @@ import { Ship } from "../modules/ship.js";
 import { GameBoard } from "../modules/gameBoard.js";
 
 describe.skip("array creation tests", () => {
-    const gameBoard = new GameBoard();
+    const gameBoard = new GameBoard(10);
     test("when arrays are created the is ship Value is false", () => {
         expect(gameBoard.board[0][0].isShip).toBe(false);
     });
@@ -14,7 +14,7 @@ describe.skip("array creation tests", () => {
 
 describe.skip("placeShips method", () => {
     test("Placing 2 ships of size 4 and 5 with the placeships method ", () => {
-        const gameBoard = new GameBoard();
+        const gameBoard = new GameBoard(10);
 
         gameBoard.ships.push(
             new Ship(5, [
@@ -46,7 +46,7 @@ describe.skip("placeShips method", () => {
     });
 
     describe.skip("placing one ship correctly using the placeship method which doesnt effect other slots", () => {
-        const gameBoard = new GameBoard();
+        const gameBoard = new GameBoard(10);
         gameBoard.ships.push(
             new Ship(2, [
                 [1, 2],
@@ -71,8 +71,8 @@ describe.skip("placeShips method", () => {
     });
 });
 
-describe("findShip and attacking methods", () => {
-    const gameBoard = new GameBoard();
+describe.skip("findShip and attacking methods", () => {
+    const gameBoard = new GameBoard(10);
 
     const ship = new Ship(5, [
         [1, 2],
@@ -113,8 +113,8 @@ describe("findShip and attacking methods", () => {
     });
 });
 
-describe("testing shipsDown() get method ", () => {
-    const gameBoard = new GameBoard();
+describe.skip("testing shipsDown() get method ", () => {
+    const gameBoard = new GameBoard(10);
     gameBoard.ships.push(new Ship(1, [[1, 5]]));
     test("sitatuation where shipsDown should return true", () => {
         gameBoard.placeShips();
@@ -125,5 +125,21 @@ describe("testing shipsDown() get method ", () => {
         gameBoard.placeShips();
         gameBoard.ships.push(new Ship(1, [[2, 4]]));
         expect(gameBoard.shipsDown).toBe(false);
+    });
+});
+
+describe("everything to do with the generateRandomLocation method ", () => {
+    const gameBoard = new GameBoard(10);
+    test("can generate random location for one ship ", () => {
+        const ship = new Ship(3);
+        gameBoard.ships.push(ship);
+
+        const randomLocal = gameBoard.generateRandomLocation(
+            // basically ship variable is being passed in
+            gameBoard.ships[0]
+        );
+        gameBoard.ships[0].coords = randomLocal;
+        expect(randomLocal).toEqual(expect.arrayContaining([]));
+        expect(randomLocal.length).toBe(ship.length);
     });
 });

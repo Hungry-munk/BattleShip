@@ -22,5 +22,6 @@ module.exports = {
         ],
         "default-param-last": ["off"],
         "no-debugger": "off",
+        "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
     },
 };

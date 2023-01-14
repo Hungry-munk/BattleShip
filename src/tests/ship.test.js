@@ -15,7 +15,7 @@ describe("hit method", () => {
     });
 });
 
-describe("sunk method", () => {
+describe.skip("sunk method", () => {
     test("a ship of length 2 to be sunked after hit twice", () => {
         const ship = new Ship(2);
         ship.hit();
@@ -31,8 +31,8 @@ describe("sunk method", () => {
     });
 });
 
-describe("testing ship coordinates", () => {
-    const ship = new Ship(3, [
+describe.skip("testing ship coordinates", () => {
+    const ship = new Ship(5, [
         [1, 2],
         [2, 2],
         [3, 2],

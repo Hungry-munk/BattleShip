@@ -3,7 +3,8 @@ import { Player } from "./player.js";
 export class AiPlayer extends Player {
     constructor(name) {
         super(name);
-        this.previousMoveHit = { hit: false, nearMove: [] };
+        this.previousMoveHit = { hit: false, move: undefined };
+        this.previousSourounding = { oneHit: true, moves: undefined };
     }
 
     getRandomCoord() {
@@ -29,5 +30,11 @@ export class AiPlayer extends Player {
 
     getRandomNearMove() {
         return this;
+    }
+
+    getCoord() {
+        if (this.previousMoveHit.hit) {
+            // if it the last move was a hit
+        }
     }
 }

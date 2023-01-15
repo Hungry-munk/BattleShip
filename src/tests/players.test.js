@@ -5,6 +5,7 @@ import { AiPlayer } from "../modules/AiPlayer.js";
 describe("AIplayers ability to shoot different locations both random and close to the previous if hit", () => {
     const mockAiPlayer = new AiPlayer();
     test("AI player can shoot at random cord with empty board", () => {
+        //  returns arrau with 2 items in it
         expect(mockAiPlayer.getRandomCoord().length).toBe(2);
     });
 });

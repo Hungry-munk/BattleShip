@@ -10,6 +10,7 @@ export class GameBoard {
             );
         this.ships = [];
         this.missedShots = [];
+        this.hitShots = [];
     }
 
     placeShip(allCoords) {
@@ -34,12 +35,13 @@ export class GameBoard {
 
     receiveAttack(coords) {
         if (this.board[coords[0]][coords[1]].isShip) {
-            const ship = this.findShip(coords);
-            ship.hit();
-        } else {
-            this.missedShots.push(coords);
+            this.findShip(coords).hit();
+            this.board[coords[0]][coords[1]].attacked = true;
+            this.hitShots.push(coords);
+            return { hit: true, coords };
         }
-        this.board[coords[0]][coords[1]].attacked = true;
+        this.missedShots.push(coords);
+        return { hit: false, coords };
     }
 
     get shipsDown() {
@@ -53,7 +55,7 @@ export class GameBoard {
         do {
             shipCoords = this.#generateRandomLocationPath(
                 // get origin coords
-                [this.#randomCoord(), this.#randomCoord()],
+                [this.randomCoord(), this.randomCoord()],
                 // get direction where 1 is vertcal and 0 is horizontal
                 Math.floor(Math.random() * 2),
                 ship.length
@@ -63,7 +65,7 @@ export class GameBoard {
         return shipCoords;
     }
 
-    #randomCoord() {
+    randomCoord() {
         return Math.floor(Math.random() * this.size);
     }
 
@@ -71,7 +73,7 @@ export class GameBoard {
         if (this.checkCollision([origin])) return false;
         const nextShipCoords = [[...origin]];
         const previousShipCoords = [[...origin]];
-
+        // going both up and down or left and right
         let nextOutOfBounds = false;
         let previousOutOfBounds = false;
 

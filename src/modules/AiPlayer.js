@@ -1,8 +1,30 @@
 import { Player } from "./player.js";
 
 export class AiPlayer extends Player {
-    getRandomMove() {
-        return this;
+    constructor(name) {
+        super(name);
+        this.previousMoveHit = { hit: false, nearMove: [] };
+    }
+
+    getRandomCoord() {
+        let randomCoord;
+        do {
+            randomCoord = [
+                this.gameBoard.randomCoord(),
+                this.gameBoard.randomCoord(),
+            ];
+        } while (this.#repeatedCoord(randomCoord));
+        return randomCoord;
+    }
+
+    #repeatedCoord(coord) {
+        return !![
+            ...this.gameBoard.missedShots,
+            ...this.gameBoard.hitShots,
+        ].find(
+            missedShot =>
+                missedShot[0] === coord[0] && missedShot[1] === coord[1]
+        );
     }
 
     getRandomNearMove() {

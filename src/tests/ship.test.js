@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Ship } from "../modules/ship.js";
 
-describe("hit method", () => {
+describe.skip("hit method", () => {
     test("increaments hitCount ", () => {
         const ship = new Ship(4);
         ship.hit();

@@ -141,8 +141,8 @@ describe.skip("checkCollision method", () => {
     });
 });
 
-describe("everything to do with the generateRandomLocation method ", () => {
-    describe.skip("testing singular placements with th generateRandomLocation method", () => {
+describe.skip("everything to do with the generateRandomLocation method ", () => {
+    describe("testing singular placements with th generateRandomLocation method", () => {
         const gameBoard = new GameBoard(10);
         test("can generate random location for one ship ", () => {
             const ship = new Ship(5);

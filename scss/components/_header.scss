@@ -1,0 +1,6 @@
+header {
+    img {
+        width: clamp(400px, calc(100vw - 30rem), 650px);
+        height: auto;
+    }
+}

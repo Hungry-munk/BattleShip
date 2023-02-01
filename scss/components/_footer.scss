@@ -1,0 +1,15 @@
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem;
+    a {
+        font-size: 1.5rem;
+        i {
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}

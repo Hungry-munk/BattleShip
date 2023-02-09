@@ -1,6 +1,9 @@
 header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     img {
-        width: clamp(400px, calc(100vw - 30rem), 650px);
+        width: clamp(400px, calc(100vw - 50rem), 650px);
         height: auto;
     }
 }

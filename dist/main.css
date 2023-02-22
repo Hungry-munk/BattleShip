@@ -15,6 +15,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  background: linear-gradient(135deg, #fdcd3b 55%, #ffed4b 50%);
 }
 
 header {
@@ -57,16 +58,21 @@ main#originPage div.nameSelection input {
   padding: 0.8rem 0.5rem 0.5rem;
   font-size: 1rem;
   outline: none;
+  border: 1px solid;
+}
+main#originPage div.nameSelection input::placeholder {
+  color: #828282;
 }
 main#originPage div.nameSelection input:focus::placeholder {
   visibility: hidden;
 }
-main#originPage div.nameSelection input:focus ~ label {
+main#originPage div.nameSelection input:focus ~ label, main#originPage div.nameSelection input:not(:placeholder-shown) ~ label {
   transition: linear 0.1s;
   visibility: visible;
   top: 0;
   left: 0.45rem;
   font-size: 0.75rem;
+  color: black;
 }
 main#originPage div.nameSelection label {
   font-size: 1rem;
@@ -74,7 +80,24 @@ main#originPage div.nameSelection label {
   top: 1.1rem;
   left: 0.55rem;
   visibility: hidden;
+  color: #828282;
 }
 main#originPage div.nameSelection span.nameErrorMsg {
   position: absolute;
+  bottom: -1rem;
+  left: 5px;
+  font-size: 0.85rem;
+  color: #f03541;
+}
+main#originPage button.startButton {
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  color: black;
+  width: 8rem;
+  height: 2rem;
+  border: 1px solid;
+}
+main#originPage button.startButton:hover {
+  cursor: pointer;
 }

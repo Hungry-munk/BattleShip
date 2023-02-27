@@ -1,6 +1,6 @@
 @use "./shared.scss" as s;
 
-main#originPage {
+div.nameSelectionContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +17,7 @@ main#originPage {
             font-size: 1rem;
             outline: none;
             border: 1px solid;
+            border-radius: s.$borderRadius;
 
             // for coluring the placeholder
             &::placeholder {

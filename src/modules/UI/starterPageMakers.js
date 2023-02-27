@@ -1,8 +1,8 @@
 export function nameEnterMaker() {
-    const rootElement = document.createElement("div");
-    rootElement.id = "root";
+    const nameSelectionContainer = document.createElement("div");
+    nameSelectionContainer.classList.add("nameSelectionContainer");
 
-    rootElement.innerHTML = `
+    nameSelectionContainer.innerHTML = `
         <div class="nameSelection">
             <input
                 type="text"
@@ -13,9 +13,11 @@ export function nameEnterMaker() {
             <label>Combatant Name</label>
             <span class="nameErrorMsg"></span>
         </div>
+
+        <button type="button" class="startButton">Start Game</button>
     `;
 
-    return rootElement;
+    return nameSelectionContainer;
 }
 
 export function headerMaker() {
@@ -34,4 +36,5 @@ export function footerMaker() {
                 <i class="fa-brands fa-github"></i>
             </a>
     `;
+    return footerElement;
 }

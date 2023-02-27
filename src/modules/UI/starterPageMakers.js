@@ -1,3 +1,5 @@
+import * as func from "../functions.js";
+
 export function nameEnterMaker() {
     const nameSelectionContainer = document.createElement("div");
     nameSelectionContainer.classList.add("nameSelectionContainer");
@@ -16,6 +18,22 @@ export function nameEnterMaker() {
 
         <button type="button" class="startButton">Start Game</button>
     `;
+
+    const button = nameSelectionContainer.querySelector("button");
+
+    button.addEventListener("click", () => {
+        const text = document.querySelector("input");
+        const textValidationObject = func.checkNameValidity(text.value);
+        const nameErrorMsg = document.querySelector("span.nameErrorMsg");
+        if (textValidationObject.validity) {
+            // start game
+        } else {
+            nameErrorMsg.textContent = textValidationObject.message;
+            setTimeout(() => {
+                nameErrorMsg.textContent = "";
+            }, 2000);
+        }
+    });
 
     return nameSelectionContainer;
 }

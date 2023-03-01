@@ -1,4 +1,4 @@
-import * as func from "../functions.js";
+import * as eFunc from "./eventFunctions.js";
 
 export function nameEnterMaker() {
     const nameSelectionContainer = document.createElement("div");
@@ -21,19 +21,7 @@ export function nameEnterMaker() {
 
     const button = nameSelectionContainer.querySelector("button");
 
-    button.addEventListener("click", () => {
-        const text = document.querySelector("input");
-        const textValidationObject = func.checkNameValidity(text.value);
-        const nameErrorMsg = document.querySelector("span.nameErrorMsg");
-        if (textValidationObject.validity) {
-            // start game
-        } else {
-            nameErrorMsg.textContent = textValidationObject.message;
-            setTimeout(() => {
-                nameErrorMsg.textContent = "";
-            }, 2000);
-        }
-    });
+    button.addEventListener("click", eFunc.validateStartGameEvent);
 
     return nameSelectionContainer;
 }
@@ -55,4 +43,14 @@ export function footerMaker() {
             </a>
     `;
     return footerElement;
+}
+
+// combinding them all
+export function starterPageMaker() {
+    const pageBody = document.createElement("div");
+    pageBody.id = "root";
+    pageBody.appendChild(headerMaker());
+    pageBody.appendChild(nameEnterMaker());
+    pageBody.appendChild(footerMaker());
+    return pageBody;
 }

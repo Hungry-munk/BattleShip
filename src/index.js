@@ -1,5 +1,6 @@
-import * as UI from "./modules/UI/UICombider.js";
+import { starterPageMaker } from "./modules/UI/starterPageMakers.js";
+
 const bodyElement = document.querySelector("body");
 
 // making starter page appear
-bodyElement.appendChild(UI.starterPageMaker());
+bodyElement.appendChild(starterPageMaker());

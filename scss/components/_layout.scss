@@ -23,3 +23,12 @@ div#root {
     grid-template-rows: auto 1fr auto;
     height: 100%;
 }
+
+// for extra beuty lol
+noscript {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+}

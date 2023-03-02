@@ -4,6 +4,9 @@ export function validateStartGameEvent() {
     const text = document.querySelector("input");
     const textValidationObject = func.checkNameValidity(text.value);
     if (textValidationObject.validity) {
+        // making name selection disspear
+        const divRoot = document.querySelector(".root");
+        divRoot.innerHTML = "";
         // bring out ship placements UI
     } else {
         const nameErrorMsg = document.querySelector("span.nameErrorMsg");

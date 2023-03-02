@@ -1,10 +1,10 @@
 import * as eFunc from "./eventFunctions.js";
 
 export function nameEnterMaker() {
-    const nameSelectionContainer = document.createElement("div");
-    nameSelectionContainer.classList.add("nameSelectionContainer");
+    const startingRootDiv = document.createElement("div");
+    startingRootDiv.classList.add("root");
 
-    nameSelectionContainer.innerHTML = `
+    startingRootDiv.innerHTML = `
         <div class="nameSelection">
             <input
                 type="text"
@@ -19,11 +19,11 @@ export function nameEnterMaker() {
         <button type="button" class="startButton">Start Game</button>
     `;
 
-    const button = nameSelectionContainer.querySelector("button");
+    const button = startingRootDiv.querySelector("button");
 
     button.addEventListener("click", eFunc.validateStartGameEvent);
 
-    return nameSelectionContainer;
+    return startingRootDiv;
 }
 
 export function headerMaker() {
